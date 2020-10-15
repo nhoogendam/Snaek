@@ -1,7 +1,6 @@
 package snake.api;
 
 import java.util.LinkedList;
-import javafx
 
 public class Snaek {
 
