@@ -1,6 +1,7 @@
 package snake.api;
 
 import java.util.LinkedList;
+import javafx
 
 public class Snaek {
 
@@ -12,11 +13,6 @@ public class Snaek {
 		this.board = board;
 	}
 
-	public boolean collision() {
-
-		return false;
-	}
-
 	public Direction getDirection() {
 		return dir;
 	}
@@ -24,25 +20,6 @@ public class Snaek {
 	public LinkedList<Cell> getSnake() {
 		return snake;
 	}
-
-	public void move() {
-		switch (dir) {
-
-		case UP:
-			moveDir(-1, 0);
-			break;
-		case DOWN:
-			moveDir(1, 0);
-			break;
-		case LEFT:
-			moveDir(0, -1);
-			break;
-		case RIGHT:
-			moveDir(0, 1);
-			break;
-		}
-	}
-
 	public void moveDir(final int x, final int y) {
 		// get the head of the snake
 		final Cell head = snake.getFirst();
@@ -55,6 +32,24 @@ public class Snaek {
 		board.getCell(tail).setType(CellType.EMPTY);
 		snake.addFirst(next);
 	}
+	public void move() {
+		switch (dir) {
+			case UP:
+				moveDir(-1, 0);
+				break;
+			case DOWN:
+				moveDir(1, 0);
+				break;
+			case LEFT:
+				moveDir(0, -1);
+				break;
+			case RIGHT:
+				moveDir(0, 1);
+				break;
+		}
+	}
+
+	
 
 	public void setDirection(final Direction dir) {
 		this.dir = dir;
