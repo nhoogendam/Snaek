@@ -35,7 +35,7 @@ public class Game {
 			}
 			else {
 				System.out.println("Had to rerandom");
-				//Rerandom the coordinates
+				//Re-random the coordinates
 				foodRow = rand.nextInt(Board.getRowCount());
 				foodCol = rand.nextInt(Board.getColCount());
 			}

@@ -77,6 +77,10 @@ public class Board {
 		return board[x][y];
 	}
 	
+	public Cell getCell(Cell cell) {
+		return getCell(cell.getRow(), cell.getCol());
+	}
+	
 	public Snaek getSnaek() {
 		return snaek;
 	}
