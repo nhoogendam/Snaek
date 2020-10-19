@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Snaek {
 
-	private final LinkedList<Cell> snake = new LinkedList<>();
+	private final LinkedList<Cell> snakeBody = new LinkedList<>();
 	private final Board board;
 	private Direction dir;
 
@@ -15,22 +15,57 @@ public class Snaek {
 	public Direction getDirection() {
 		return dir;
 	}
+	
+	public Cell getHead() {
+		return snakeBody.getFirst();
+	}
 
 	public LinkedList<Cell> getSnake() {
-		return snake;
+		return snakeBody;
 	}
 	public void moveDir(final int x, final int y) {
 		// get the head of the snake
-		final Cell head = snake.getFirst();
-
-		// Get the cell based in relation to the head
-		final Cell next = new Cell(head.getRow() + x, head.getCol() + y, CellType.SNAKEBODY);
-
-		// remove the last cell and make the celltype empty
-		final Cell tail = snake.removeLast();
+		final Cell head = snakeBody.getFirst();
+		final Cell tail = snakeBody.removeLast();
 		board.getCell(tail).setType(CellType.EMPTY);
-		snake.addFirst(next);
+		
+		final Cell next = new Cell(head.getRow() + x, head.getCol() + y, CellType.SNAKEBODY);
+		
+		snakeBody.addFirst(next);
 	}
+	
+	public Cell getNextMove() {
+		Cell next = null;
+		final Cell head = snakeBody.getFirst();
+		//check if the cell is out of bounds
+		int nextCol = head.getCol();
+		int nextRow = head.getRow();
+		/*
+		 * TODO: This is breaking because the nextCol - 1 is outside of the array when the snake is adjacent
+		 * 		 need to fix this so that it does it based on the direction
+		 */
+		if(nextRow + 1 >= Board.getRowCount() || nextRow - 1 < 0
+				|| nextCol + 1 >= Board.getColCount() || nextCol - 1 < 0) {
+			return next;
+		}
+		
+		switch (dir) {
+		case UP:
+			next = board.getCell(head.getRow() - 1, head.getCol());
+			break;
+		case DOWN:
+			next = board.getCell(head.getRow() + 1, head.getCol());
+			break;
+		case LEFT:
+			next = board.getCell(head.getRow(), head.getCol() - 1);
+			break;
+		case RIGHT:
+			next = board.getCell(head.getRow(), head.getCol() + 1);
+			break;
+	}
+	return next;
+}
+	
 	public void move() {
 		switch (dir) {
 			case UP:
@@ -47,9 +82,7 @@ public class Snaek {
 				break;
 		}
 	}
-
 	
-
 	public void setDirection(final Direction dir) {
 		this.dir = dir;
 	}

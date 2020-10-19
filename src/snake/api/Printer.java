@@ -11,6 +11,7 @@ public class Printer {
 		num += str.length();
 		System.out.println(str);
 	}
+	
 	public void print(int n) {
 		String str = String.valueOf(n);
 		num += str.length();
@@ -29,5 +30,4 @@ public class Printer {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	
 }
