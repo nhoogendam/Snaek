@@ -6,7 +6,7 @@ public class Snaek {
 
 	private final LinkedList<Cell> snakeBody = new LinkedList<>();
 	private final Board board;
-	private Direction dir;
+	private Direction dir = Direction.RIGHT;
 
 	public Snaek(final Board board) {
 		this.board = board;
@@ -41,11 +41,12 @@ public class Snaek {
 		int nextCol = head.getCol();
 		int nextRow = head.getRow();
 		/*
-		 * TODO: This is breaking because the nextCol - 1 is outside of the array when the snake is adjacent
-		 * 		 need to fix this so that it does it based on the direction
+		 * This says if it goes out of bounds and at a direction then the game is over
 		 */
-		if(nextRow + 1 >= Board.getRowCount() || nextRow - 1 < 0
-				|| nextCol + 1 >= Board.getColCount() || nextCol - 1 < 0) {
+		if((nextRow + 1 >= Board.getRowCount() && dir == Direction.DOWN) 
+		|| (nextRow - 1 < 0 && dir == Direction.UP)
+		|| (nextCol + 1 >= Board.getColCount() && dir == Direction.RIGHT)
+		|| (nextCol - 1 < 0 && dir == Direction.LEFT)) {
 			return next;
 		}
 		
